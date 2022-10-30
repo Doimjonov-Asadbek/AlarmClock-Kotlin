@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistrationActivity">
+
+    <EditText
+        android:id="@+id/email_adres"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="150dp"
+        android:background="@drawable/corner"
+        android:hint="Email"
+        android:inputType="text"
+        android:padding="15dp"
+        android:textColorHint="#625E5E"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="Autofill,HardcodedText,MissingConstraints,TextFields" />
+
+    <EditText
+        android:id="@+id/signIn_Password"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/corner"
+        android:hint="Parol"
+        android:inputType="text"
+        android:padding="15dp"
+        android:textColorHint="#625E5E"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/email_adres"
+        tools:ignore="Autofill,HardcodedText,MissingConstraints,TextFields" />
+
+    <EditText
+        android:id="@+id/signup_Password"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/corner"
+        android:hint="Parolni qaytadan kiriting"
+        android:inputType="text"
+        android:padding="15dp"
+        android:textColorHint="#625E5E"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/signIn_Password"
+        tools:ignore="Autofill,HardcodedText,MissingConstraints,TextFields" />
+
+    <Button
+        android:id="@+id/btn_kirish"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="54dp"
+        android:background="@drawable/corner"
+        android:text="Ro'yxatdan o'tish"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/signup_Password"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/hisobingiz_yoqmi"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginBottom="16dp"
+        android:text="Hisobingiz bormi? "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        tools:ignore="HardcodedText,MissingConstraints,RtlSymmetry" />
+
+    <TextView
+        android:id="@+id/txt_kirish"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        android:text="Kirish"
+        android:textColor="#219EBC"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/hisobingiz_yoqmi"
+        tools:ignore="HardcodedText,MissingConstraints" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.06" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.94" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.57" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

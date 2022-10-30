@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="switch_padding">-5dp</dimen>
+    <dimen name="switch_radius">3dp</dimen>
+    <dimen name="switch_size">24dp</dimen>
+</resources>
