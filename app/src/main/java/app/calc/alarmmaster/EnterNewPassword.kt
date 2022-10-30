@@ -1,16 +1,13 @@
 package app.calc.alarmmaster
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.EditText
-import android.widget.ProgressBar
 
 class EnterNewPassword : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")

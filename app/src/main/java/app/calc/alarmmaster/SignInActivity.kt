@@ -4,8 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -29,18 +31,17 @@ class SignInActivity : AppCompatActivity() {
         val email_adres = findViewById<EditText>(R.id.email_adres)
         val signIn_Password = findViewById<EditText>(R.id.signIn_Password)
         val btn_kirish = findViewById<Button>(R.id.btn_kirish)
+        val Progress = findViewById<ProgressBar>(R.id.Progress)
 
         sharedPreferences = getSharedPreferences("MyReg", MODE_PRIVATE)
         preference = sharedPreferences?.getString("preference", "").toString()
 
         btn_kirish.setOnClickListener {
-
             if (email_adres.text.toString().isEmpty()) {
                 email_adres.error = "Emailni kiriting"
             } else if (signIn_Password.text.toString().isEmpty()) {
                 signIn_Password.error = "Parolni kiriting"
             } else {
-
                 val user = User(
                     email_adres.text.toString(),
                     signIn_Password.text.toString()
@@ -52,14 +53,15 @@ class SignInActivity : AppCompatActivity() {
                         if (response.isSuccessful) {
                             val user = response.body()
                             if (user != null) {
+
+                                btn_kirish.visibility = View.GONE
+                                Progress.visibility = View.VISIBLE
+
                                 val editor = sharedPreferences?.edit()
                                 editor?.putString("preference", response.body()?.token)
                                 editor?.apply()
 
-                                val checkVerify = SignUp(
-                                    email_adres.text.toString(),
-                                    signIn_Password.text.toString()
-                                )
+                                val checkVerify = SignUp(email_adres.text.toString(), signIn_Password.text.toString())
 
                                 val check: Call<SignUp> = ApiClient.userService.cheskverefy(checkVerify)
                                 check.enqueue(object : retrofit2.Callback<SignUp> {
@@ -101,7 +103,11 @@ class SignInActivity : AppCompatActivity() {
                                                     }
 
                                                     override fun onFailure(call: Call<SendVerify>, t: Throwable) {
-                                                        Toast.makeText(this@SignInActivity, "Internet bilan bog'lanishda xatolik", Toast.LENGTH_SHORT).show()
+                                                        Toast.makeText(
+                                                            this@SignInActivity,
+                                                            "Internet bilan bog'lanishda xatolik",
+                                                            Toast.LENGTH_SHORT
+                                                        ).show()
                                                     }
                                                 })
                                             }
@@ -114,7 +120,8 @@ class SignInActivity : AppCompatActivity() {
                                 })
                             } else {
                                 Toast.makeText(
-                                    this@SignInActivity, "Email yoki parol xato", Toast.LENGTH_SHORT).show()
+                                    this@SignInActivity, "Email yoki parol xato", Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
                     }
@@ -123,7 +130,6 @@ class SignInActivity : AppCompatActivity() {
                         Toast.makeText(this@SignInActivity, "Internet bilan bog'lanishda xatolik", Toast.LENGTH_SHORT).show()
                     }
                 })
-
             }
         }
 

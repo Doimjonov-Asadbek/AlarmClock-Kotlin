@@ -7,6 +7,19 @@
     tools:context=".SignInActivity"
     tools:ignore="ExtraText">
 
+    <ProgressBar
+        android:id="@+id/Progress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/hisobingiz_yoqmi"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/signIn_Password"
+        app:layout_constraintVertical_bias="0.249"
+        tools:ignore="MissingConstraints" />
+
     <EditText
         android:id="@+id/email_adres"
         android:layout_width="0dp"

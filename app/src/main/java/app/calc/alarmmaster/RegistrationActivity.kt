@@ -1,16 +1,12 @@
 package app.calc.alarmmaster
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import app.calc.alarmmaster.model.ApiClient
 import app.calc.alarmmaster.model.SignUp
-import app.calc.alarmmaster.model.User
 import retrofit2.Call
 
 class RegistrationActivity : AppCompatActivity() {
@@ -21,28 +17,28 @@ class RegistrationActivity : AppCompatActivity() {
         supportActionBar?.hide()
         setContentView(R.layout.activity_registration)
 
-        val txt_kirish = findViewById<TextView>(R.id.txt_kirish)
-        val email_adres = findViewById<EditText>(R.id.email_adres)
-        val signIn_Password = findViewById<EditText>(R.id.signIn_Password)
-        val signup_Password = findViewById<EditText>(R.id.signup_Password)
-        val btn_kirish = findViewById<Button>(R.id.btn_kirish)
+        val txtEnter= findViewById<TextView>(R.id.txt_kirish)
+        val email= findViewById<EditText>(R.id.email_adres)
+        val signInPassword = findViewById<EditText>(R.id.signIn_Password)
+        val returnPassword = findViewById<EditText>(R.id.signup_Password)
+        val btnEnter = findViewById<Button>(R.id.btn_kirish)
 
-        btn_kirish.setOnClickListener {
-            if (email_adres.text.toString().isEmpty()) {
-                email_adres.error = "Emailni kiriting"
-            } else if (!email_adres.text.toString().endsWith("@gmail.com")) {
-                email_adres.error = "@gmail.com"
-            } else if (signIn_Password.text.toString() != signup_Password.text.toString()) {
-                signup_Password.error = "Parolni noto'g'ri kiritdingiz"
-                signIn_Password.error = "Parolni noto'g'ri kiritdingiz"
-            } else if (signIn_Password.text.toString().isEmpty()) {
-                signIn_Password.error = "Parolni kiriting"
-            } else if (signup_Password.text.toString().isEmpty()) {
-                signup_Password.error = "Parolni kiriting"
+        btnEnter.setOnClickListener {
+            if (email.text.toString().isEmpty()) {
+                email.error = "Emailni kiriting"
+            } else if (!email.text.toString().endsWith("@gmail.com")) {
+                email.error = "@gmail.com"
+            } else if (signInPassword.text.toString() != returnPassword.text.toString()) {
+                returnPassword.error = "Parolni noto'g'ri kiritdingiz"
+                signInPassword.error = "Parolni noto'g'ri kiritdingiz"
+            } else if (signInPassword.text.toString().isEmpty()) {
+                signInPassword.error = "Parolni kiriting"
+            } else if (returnPassword.text.toString().isEmpty()) {
+                returnPassword.error = "Parolni kiriting"
             } else {
                 val register = SignUp(
-                    email_adres.text.toString(),
-                    signIn_Password.text.toString()
+                    email.text.toString(),
+                    signInPassword.text.toString()
                 )
 
                 val signUp: Call<SignUp> = ApiClient.userService.signUp(register)
@@ -57,7 +53,7 @@ class RegistrationActivity : AppCompatActivity() {
                                 val intent = Intent(this@RegistrationActivity, VerificationCode::class.java)
                                 intent.putExtra("token",response.body()!!.token)
                                 intent.putExtra("verify",response.body()!!.verefy)
-                                intent.putExtra("email",email_adres.text.toString())
+                                intent.putExtra("email",email.text.toString())
                                 startActivity(intent)
                             }
                         }
@@ -70,7 +66,7 @@ class RegistrationActivity : AppCompatActivity() {
             }
         }
 
-        txt_kirish.setOnClickListener {
+        txtEnter.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
             finish()

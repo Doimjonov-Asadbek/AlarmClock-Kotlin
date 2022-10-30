@@ -143,7 +143,7 @@ class ClockActivity : AppCompatActivity() {
                     }
                 })
             }
-            .setNegativeButton("Bekor qilish") { _, _ -> }
+            .setNegativeButton("Bekor qilish") { dialog, which -> }
             .create()
         addDialog.create()
         addDialog.show()

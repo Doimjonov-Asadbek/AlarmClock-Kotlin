@@ -9,7 +9,6 @@ import android.text.InputFilter
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ProgressBar
 import android.widget.TextView
 
 class RecoveryPasswordActivity : AppCompatActivity() {
