@@ -52,89 +52,75 @@ class SignInActivity : AppCompatActivity() {
                         if (response.isSuccessful) {
                             val user = response.body()
                             if (user != null) {
-                                Toast.makeText(this@SignInActivity, response.body()?.token, Toast.LENGTH_SHORT).show()
                                 val editor = sharedPreferences?.edit()
                                 editor?.putString("preference", response.body()?.token)
                                 editor?.apply()
+
+                                val checkVerify = SignUp(
+                                    email_adres.text.toString(),
+                                    signIn_Password.text.toString()
+                                )
+
+                                val check: Call<SignUp> = ApiClient.userService.cheskverefy(checkVerify)
+                                check.enqueue(object : retrofit2.Callback<SignUp> {
+                                    override fun onResponse(
+                                        call: Call<SignUp>,
+                                        response: retrofit2.Response<SignUp>
+                                    ) {
+                                        if (response.isSuccessful) {
+                                            val user = response.body()!!.verefy
+                                            if (user != "false") {
+                                                startActivity(Intent(this@SignInActivity, ClockActivity::class.java))
+                                                finish()
+                                            } else {
+
+                                                val sendVerify = SendVerify(
+                                                    email_adres.text.toString(),
+                                                    signIn_Password.text.toString()
+                                                )
+
+                                                val send: Call<SendVerify> =
+                                                    ApiClient.userService.resendVerefication(sendVerify)
+                                                send.enqueue(object : retrofit2.Callback<SendVerify> {
+                                                    override fun onResponse(
+                                                        call: Call<SendVerify>,
+                                                        response: retrofit2.Response<SendVerify>
+                                                    ) {
+                                                        if (response.isSuccessful) {
+                                                            val user = response.body()!!.verefyCode
+                                                            val intent = Intent(
+                                                                this@SignInActivity,
+                                                                VerificationCode::class.java
+                                                            )
+                                                            intent.putExtra("email", email_adres.text.toString())
+                                                            intent.putExtra("verify", user)
+                                                            startActivity(intent)
+                                                            finish()
+
+                                                        }
+                                                    }
+
+                                                    override fun onFailure(call: Call<SendVerify>, t: Throwable) {
+                                                        Toast.makeText(this@SignInActivity, "Internet bilan bog'lanishda xatolik", Toast.LENGTH_SHORT).show()
+                                                    }
+                                                })
+                                            }
+                                        }
+                                    }
+
+                                    override fun onFailure(call: Call<SignUp>, t: Throwable) {
+                                        Toast.makeText(this@SignInActivity, "Internet bilan bog'lanishda xatolik", Toast.LENGTH_SHORT).show()
+                                    }
+                                })
                             } else {
                                 Toast.makeText(
-                                    this@SignInActivity, "Email yoki parol xato", Toast.LENGTH_SHORT
-                                ).show()
+                                    this@SignInActivity, "Email yoki parol xato", Toast.LENGTH_SHORT).show()
                             }
                         }
                     }
 
                     override fun onFailure(call: Call<User>, t: Throwable) {
-                        Toast.makeText(
-                            this@SignInActivity,
-                            "Internet bilan bog'lanishda xatolik",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                })
-
-                val checkVerify = SignUp(
-                    email_adres.text.toString(),
-                    signIn_Password.text.toString()
-                )
-
-                val check: Call<SignUp> = ApiClient.userService.cheskverefy(checkVerify)
-                check.enqueue(object : retrofit2.Callback<SignUp> {
-                    override fun onResponse(
-                        call: Call<SignUp>,
-                        response: retrofit2.Response<SignUp>
-                    ) {
-                        if (response.isSuccessful) {
-                            val user = response.body()!!.verefy
-                            if (user != "false") {
-                                startActivity(Intent(this@SignInActivity, ClockActivity::class.java))
-                                finish()
-                            } else {
-
-                                val sendVerify = SendVerify(
-                                    email_adres.text.toString(),
-                                    signIn_Password.text.toString()
-                                )
-
-                                val send: Call<SendVerify> =
-                                    ApiClient.userService.resendVerefication(sendVerify)
-                                send.enqueue(object : retrofit2.Callback<SendVerify> {
-                                    override fun onResponse(
-                                        call: Call<SendVerify>,
-                                        response: retrofit2.Response<SendVerify>
-                                    ) {
-                                        if (response.isSuccessful) {
-                                            val user = response.body()!!.verefyCode
-                                            val intent = Intent(
-                                                this@SignInActivity,
-                                                VerificationCode::class.java
-                                            )
-                                            intent.putExtra("email", email_adres.text.toString())
-                                            intent.putExtra("verify", user)
-                                            startActivity(intent)
-                                            finish()
-
-                                        }
-                                    }
-
-                                    override fun onFailure(call: Call<SendVerify>, t: Throwable) {
-                                        Toast.makeText(
-                                            this@SignInActivity,
-                                            "Internet bilan bog'lanishda xatolik",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                    }
-                                })
-                            }
-                        }
-                    }
-
-                    override fun onFailure(call: Call<SignUp>, t: Throwable) {
-                        Toast.makeText(
-                            this@SignInActivity,
-                            "Internet bilan bog'lanishda xatolik",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(this@SignInActivity, "Internet bilan bog'lanishda xatolik", Toast.LENGTH_SHORT).show()
                     }
                 })
 

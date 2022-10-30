@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import app.calc.alarmmaster.ListData
 import app.calc.alarmmaster.R
 
+@Suppress("NAME_SHADOWING")
 class ListAdapter(private val context:Activity, private val list:ArrayList<ListData>) : BaseAdapter() {
     override fun getCount(): Int {
         return list.size
@@ -56,11 +57,10 @@ class ListAdapter(private val context:Activity, private val list:ArrayList<ListD
                 list[position] = listData
                 notifyDataSetChanged()
             }
-            addDialog.setNegativeButton("Bekor qilish") { dialog, which -> }
+            addDialog.setNegativeButton("Bekor qilish") { _, _ -> }
             addDialog.create()
             addDialog.show()
         }
-
         return rowView
     }
 }
