@@ -12,7 +12,6 @@ import androidx.appcompat.app.AlertDialog
 import app.calc.alarmmaster.ListData
 import app.calc.alarmmaster.R
 
-@Suppress("NAME_SHADOWING")
 class ListAdapter(private val context:Activity, private val list:ArrayList<ListData>) : BaseAdapter() {
     override fun getCount(): Int {
         return list.size
@@ -42,24 +41,7 @@ class ListAdapter(private val context:Activity, private val list:ArrayList<ListD
         switchs.text = list[position].switchs
 
         rowView.setOnClickListener {
-            val inflater = LayoutInflater.from(context)
-            val v = inflater.inflate(R.layout.add_item, null)
-            val digitalClock = v.findViewById(R.id.digitalClock) as TimePicker
-            val comment = v.findViewById<EditText>(R.id.comment)
-            val addDialog = AlertDialog.Builder(context)
-            addDialog.setView(v)
-            addDialog.setTitle("Tahrirlash")
-            addDialog.setPositiveButton("Saqlash") { _, _ ->
-                val clock = digitalClock.hour.toString() + ":" + digitalClock.minute.toString()
-                val comment = comment.text.toString()
-                val switchs = switchs.text.toString()
-                val listData = ListData(clock, comment, switchs)
-                list[position] = listData
-                notifyDataSetChanged()
-            }
-            addDialog.setNegativeButton("Bekor qilish") { _, _ -> }
-            addDialog.create()
-            addDialog.show()
+
         }
         return rowView
     }
