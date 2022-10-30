@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,14 +21,16 @@ class MainActivity : AppCompatActivity() {
         sharedPreFence = getSharedPreferences("MyReg", MODE_PRIVATE)
         pref = sharedPreFence.getString("preference","").toString()
 
-            if (pref.isEmpty()) {
-                val intent = Intent(this, SignInActivity::class.java)
-                startActivity(intent)
-                finish()
-            } else {
-                val intent = Intent(this, ClockActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
+            Handler().postDelayed({
+                if (pref.isEmpty()) {
+                    val intent = Intent(this, SignInActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    val intent = Intent(this, ClockActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            }, 1000)
     }
 }

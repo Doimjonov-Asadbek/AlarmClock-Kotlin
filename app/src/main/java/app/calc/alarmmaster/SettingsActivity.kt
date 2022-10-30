@@ -21,8 +21,7 @@ class SettingsActivity : AppCompatActivity() {
 
         exit.setOnClickListener{
             val builder = AlertDialog.Builder(this)
-            builder.setTitle("Ishonchingiz komilmi !")
-            builder.setMessage("Hisobdan chiqmoqchimisiz?")
+            builder.setTitle("Hisobdan chiqmoqchimisiz?")
             builder.setPositiveButton("Ha") { _: DialogInterface, _: Int ->
                 val intent = Intent(this, SignInActivity::class.java)
                 startActivity(intent)
