@@ -21,14 +21,14 @@ class SettingsActivity : AppCompatActivity() {
 
         exit.setOnClickListener{
             val builder = AlertDialog.Builder(this)
-            builder.setTitle("Are you sure !")
-            builder.setMessage("Do you want to log out?")
-            builder.setPositiveButton("Yes") { _: DialogInterface, _: Int ->
+            builder.setTitle("Ishonchingiz komilmi !")
+            builder.setMessage("Hisobdan chiqmoqchimisiz?")
+            builder.setPositiveButton("Ha") { _: DialogInterface, _: Int ->
                 val intent = Intent(this, SignInActivity::class.java)
                 startActivity(intent)
                 finishAffinity()
             }
-            builder.setNegativeButton("No") { _: DialogInterface, _: Int -> }
+            builder.setNegativeButton("Yo'q") { _: DialogInterface, _: Int -> }
             builder.show()
         }
 

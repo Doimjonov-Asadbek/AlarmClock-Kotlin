@@ -32,7 +32,7 @@ class ClockActivity : AppCompatActivity() {
 
 
     private lateinit var sharedPreFence:SharedPreferences
-    var pref = ""
+    private var pref = ""
 
     @RequiresApi(Build.VERSION_CODES.M)
     @SuppressLint("MissingInflatedId")
@@ -112,7 +112,7 @@ class ClockActivity : AppCompatActivity() {
         val comment = v.findViewById<EditText>(R.id.comment)
         val addDialog = AlertDialog.Builder(this)
             .setView(v)
-            .setPositiveButton("Qo'shish") { dialog, which ->
+            .setPositiveButton("Qo'shish") { _, _ ->
                 val time = digitalClock.hour.toString() + ":" + digitalClock.minute.toString()
                 val coment = comment.text.toString()
                 val switchs = "true"
@@ -143,7 +143,7 @@ class ClockActivity : AppCompatActivity() {
                     }
                 })
             }
-            .setNegativeButton("Bekor qilish") { dialog, which -> }
+            .setNegativeButton("Bekor qilish") { _, _ -> }
             .create()
         addDialog.create()
         addDialog.show()
