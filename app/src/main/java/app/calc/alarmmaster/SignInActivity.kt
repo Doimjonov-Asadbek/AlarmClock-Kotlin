@@ -76,10 +76,7 @@ class SignInActivity : AppCompatActivity() {
                                                 finish()
                                             } else {
 
-                                                val sendVerify = SendVerify(
-                                                    email_adres.text.toString(),
-                                                    signIn_Password.text.toString()
-                                                )
+                                                val sendVerify = SendVerify(email_adres.text.toString(), signIn_Password.text.toString())
 
                                                 val send: Call<SendVerify> =
                                                     ApiClient.userService.resendVerefication(sendVerify)
@@ -103,11 +100,7 @@ class SignInActivity : AppCompatActivity() {
                                                     }
 
                                                     override fun onFailure(call: Call<SendVerify>, t: Throwable) {
-                                                        Toast.makeText(
-                                                            this@SignInActivity,
-                                                            "Internet bilan bog'lanishda xatolik",
-                                                            Toast.LENGTH_SHORT
-                                                        ).show()
+                                                        Toast.makeText(this@SignInActivity, "Internet bilan bog'lanishda xatolik", Toast.LENGTH_SHORT).show()
                                                     }
                                                 })
                                             }
@@ -120,8 +113,7 @@ class SignInActivity : AppCompatActivity() {
                                 })
                             } else {
                                 Toast.makeText(
-                                    this@SignInActivity, "Email yoki parol xato", Toast.LENGTH_SHORT
-                                ).show()
+                                    this@SignInActivity, "Email yoki parol xato", Toast.LENGTH_SHORT).show()
                             }
                         }
                     }

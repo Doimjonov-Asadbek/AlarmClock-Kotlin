@@ -39,12 +39,19 @@ class ListAdapter(private val context:Activity, private val list:ArrayList<ListD
 
         clock.text = list[position].Clock
         comment.text = list[position].comment
-        switchs.text = list[position].switchs
+        switchs.text = ""
 
         rowView.setOnClickListener {
             val inflater = LayoutInflater.from(context)
             val v = inflater.inflate(R.layout.add_item, null)
             val digitalClock = v.findViewById(R.id.digitalClock) as TimePicker
+
+            digitalClock.setIs24HourView(true)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                digitalClock.hour = list[position].Clock.split(":")[0].toInt()
+                digitalClock.minute = list[position].Clock.split(":")[1].toInt()
+            }
+
             val comment = v.findViewById<EditText>(R.id.comment)
             val addDialog = AlertDialog.Builder(context)
             addDialog.setView(v)

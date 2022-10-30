@@ -109,6 +109,13 @@ class ClockActivity : AppCompatActivity() {
         val inflater = LayoutInflater.from(this)
         val v = inflater.inflate(R.layout.add_item, null)
         val digitalClock = v.findViewById<TimePicker>(R.id.digitalClock)
+
+        digitalClock.setIs24HourView(true)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            digitalClock.hour = 0
+            digitalClock.minute = 0
+        }
+
         val comment = v.findViewById<EditText>(R.id.comment)
         val addDialog = AlertDialog.Builder(this)
             .setView(v)
